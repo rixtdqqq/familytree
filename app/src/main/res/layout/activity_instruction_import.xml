@@ -5,13 +5,6 @@
 
     <data>
 
-        <variable
-            name="member"
-            type="com.zhu.familytree.model.MemberDetailBean" />
-
-        <import type="android.text.TextUtils" />
-
-        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
