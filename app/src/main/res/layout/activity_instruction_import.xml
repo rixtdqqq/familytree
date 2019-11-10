@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="member"
+            type="com.zhu.familytree.model.MemberDetailBean" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/detail_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.InstructionImportActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#eeeeee"
+            android:elevation="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/import_instruction" />
+
+        <TextView
+            android:id="@+id/tv_member_name"
+            style="@style/DetailText"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginTop="8dp"
+            android:text="@{@string/name +` : `+member.name}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/tv_member_gender"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            tools:text="姓名 : 朱" />
+
+        <TextView
+            android:id="@+id/tv_member_gender"
+            style="@style/DetailText"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/margin"
+            android:text="@{@string/gender +` : `+(member.gender==1?`男`:`女`)}"
+            app:layout_constraintLeft_toRightOf="@+id/tv_member_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            tools:text="性别 : 男" />
+
+        <TextView
+            android:id="@+id/tv_member_birth"
+            style="@style/DetailText"
+            android:text="@{@string/birth +` : `+member.birth}"
+            app:layout_constraintLeft_toLeftOf="@id/tv_member_name"
+            app:layout_constraintRight_toLeftOf="@id/tv_member_gender"
+            app:layout_constraintTop_toBottomOf="@id/tv_member_name"
+            tools:text="生辰 : 1987-1-1" />
+
+        <TextView
+            android:id="@+id/tv_member_old_date"
+            style="@style/DetailText"
+            android:text="@{@string/old_date +` : `+member.oldDate}"
+            android:visibility="@{(TextUtils.isEmpty(member.oldDate)||TextUtils.equals(`-`,member.oldDate)) ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintLeft_toRightOf="@+id/tv_member_name"
+            app:layout_constraintRight_toRightOf="@+id/tv_member_gender"
+            app:layout_constraintTop_toBottomOf="@id/tv_member_gender"
+            tools:text="去世 : 2100-1-1" />
+
+        <TextView
+            android:id="@+id/tv_member_native_place"
+            style="@style/DetailText"
+            android:text="@{@string/native_place +` : `+member.nativePlace}"
+            app:layout_constraintLeft_toLeftOf="@id/tv_member_name"
+            app:layout_constraintRight_toLeftOf="@id/tv_member_mate"
+            app:layout_constraintTop_toBottomOf="@id/tv_member_birth"
+            tools:text="籍贯 : 广东五华" />
+
+        <TextView
+            android:id="@+id/tv_member_mate"
+            style="@style/DetailText"
+            android:text="@{@string/mate +` : `+member.mateName}"
+            app:layout_constraintLeft_toRightOf="@+id/tv_member_native_place"
+            app:layout_constraintRight_toRightOf="@+id/tv_member_gender"
+            app:layout_constraintTop_toBottomOf="@id/tv_member_old_date"
+            tools:text="配偶 : 某某某" />
+
+        <TextView
+            android:id="@+id/tv_member_profession"
+            style="@style/DetailText"
+            android:text="@{@string/profession +` : `+member.profession}"
+            app:layout_constraintLeft_toLeftOf="@id/tv_member_name"
+            app:layout_constraintRight_toRightOf="@id/tv_member_gender"
+            app:layout_constraintTop_toBottomOf="@id/tv_member_parent1"
+            tools:text="职业 : 农民" />
+
+        <TextView
+            android:id="@+id/tv_member_education"
+            style="@style/DetailText"
+            android:text="@{@string/education +` : `+member.education}"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_member_name"
+            app:layout_constraintRight_toRightOf="@+id/tv_member_gender"
+            app:layout_constraintTop_toBottomOf="@id/tv_member_profession"
+            tools:text="教育程度 : 小学" />
+
+
+        <TextView
+            android:id="@+id/tv_member_parent1"
+            style="@style/DetailText"
+            android:text="@{@string/parent1 +` : `+member.parent1}"
+            app:layout_constraintLeft_toLeftOf="@id/tv_member_name"
+            app:layout_constraintRight_toLeftOf="@id/tv_member_mate"
+            app:layout_constraintTop_toBottomOf="@id/tv_member_native_place"
+            tools:text="前一代 : zhu" />
+
+        <TextView
+            android:id="@+id/tv_member_parent2"
+            style="@style/DetailText"
+            android:text="@{@string/parent2 +` : `+member.parent2}"
+            app:layout_constraintLeft_toRightOf="@+id/tv_member_native_place"
+            app:layout_constraintRight_toRightOf="@+id/tv_member_gender"
+            app:layout_constraintTop_toBottomOf="@id/tv_member_mate"
+            tools:text="前两代 : zhu" />
+
+        <TextView
+            android:id="@+id/tv_member_address"
+            style="@style/DetailText"
+            android:text="@{@string/address +` : `+member.address}"
+            app:layout_constraintLeft_toLeftOf="@id/tv_member_name"
+            app:layout_constraintRight_toRightOf="@+id/tv_member_gender"
+            app:layout_constraintTop_toBottomOf="@id/tv_member_education"
+            tools:text="地址 : 某某某某某某某某某某某某某某某某某某某某某某某某某某" />
+
+        <TextView
+            android:id="@+id/tv_member_event_content"
+            style="@style/DetailText"
+            android:text="@{@string/event+` : \n`+member.event}"
+            app:layout_constraintLeft_toLeftOf="@id/tv_member_name"
+            app:layout_constraintRight_toRightOf="@+id/tv_member_gender"
+            app:layout_constraintTop_toBottomOf="@id/tv_member_address"
+            tools:text="事迹简单描述 : \n某某某某某某某某某某某某某某某某某某某某某某某某某某" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

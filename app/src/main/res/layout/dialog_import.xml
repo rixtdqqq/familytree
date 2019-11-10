@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_import_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/padding"
+        android:text="@string/import_start"
+        android:textColor="#1685ff"
+        android:background="@android:color/white"
+        android:textSize="20sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dadade" />
+
+    <TextView
+        android:id="@+id/tv_import_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/padding"
+        android:text="@string/import_instruction"
+        android:textColor="#1685ff"
+        android:background="@android:color/white"
+        android:textSize="20sp" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@android:color/transparent" />
+
+    <TextView
+        android:id="@+id/tv_import_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/padding"
+        android:background="@android:color/white"
+        android:text="@android:string/cancel"
+        android:textColor="#1685ff"
+        android:textSize="20sp" />
+</LinearLayout>

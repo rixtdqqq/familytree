@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">朱氏族谱</string>
+    <string name="search">搜索关键词</string>
+    <string name="import_data">请从SD卡中导入excel表数据</string>
+    <string name="import_start">开始导入</string>
+    <string name="import_instruction">导入说明</string>
+    <string name="detail">成员详情</string>
+    <string name="name">姓名</string>
+    <string name="gender">性别</string>
+    <string name="birth">生辰</string>
+    <string name="old_date">去世</string>
+    <string name="native_place">籍贯</string>
+    <string name="mate">配偶</string>
+    <string name="profession">职业</string>
+    <string name="education">教育程度</string>
+    <string name="address">地址</string>
+    <string name="event">事迹简单描述</string>
+    <string name="parent1">前一代</string>
+    <string name="parent2">前二代</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
