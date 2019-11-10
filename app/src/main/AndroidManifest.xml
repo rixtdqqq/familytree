@@ -8,7 +8,7 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_people_black_48dp"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_people_black_48dp"
         android:supportsRtl="true"
