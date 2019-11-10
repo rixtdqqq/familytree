@@ -18,6 +18,11 @@
     <string name="parent1">前一代</string>
     <string name="parent2">前二代</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="step_1">1、请联系本人提供表格模板，以一图片看不清，请横屏查看</string>
+    <string name="step_2">2、电脑上制作好excel表格，表格的格式如下图：</string>
+    <string name="step_3">3、excel表格的名称为familytree.xls</string>
+    <string name="step_4">4、excel表格的另存为保存格式为excel 2003版，如下图：</string>
+    <string name="step_5">5、将excel表格保存到目录：手机存储-Android/data/com.zhu.familytree/files</string>
+    <string name="step_6">6、打开应用，点击‘+’导入excel表格，即可看到数据。</string>
+
 </resources>

@@ -3,10 +3,8 @@ package com.zhu.familytree.view
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import com.zhu.familytree.R
-import com.zhu.familytree.databinding.ActivityInstructionImportBinding
-import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.activity_instruction_import.*
 
 /**
  * @description 导入说明
@@ -16,11 +14,9 @@ import kotlinx.android.synthetic.main.activity_detail.*
  */
 class InstructionImportActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityInstructionImportBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding =
-            DataBindingUtil.setContentView(this, R.layout.activity_instruction_import)
+        setContentView(R.layout.activity_instruction_import)
 
         toolbar.run {
             setSupportActionBar(this)
