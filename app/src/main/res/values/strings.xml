@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">朱氏族谱</string>
+    <string name="app_name">族谱</string>
     <string name="search">搜索关键词</string>
     <string name="import_data">请从SD卡中导入excel表数据</string>
     <string name="import_start">开始导入</string>
