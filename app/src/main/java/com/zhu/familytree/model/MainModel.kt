@@ -4,12 +4,6 @@ import android.os.Environment
 import com.zhu.familytree.App
 import com.zhu.familytree.base.AppDatabase
 import com.zhu.familytree.base.BaseModel
-import com.zhu.familytree.base.DataCallback
-import io.reactivex.Single
-import io.reactivex.SingleObserver
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import jxl.Workbook
 import java.io.File
 import java.io.FileInputStream
@@ -27,22 +21,22 @@ class MainModel : BaseModel() {
     }
 
 
-    fun importFamilyTreeDataFromSDCard(callback: DataCallback) {
+    fun importFamilyTreeDataFromSDCard(onError:(String)->Unit, onSuccess:(o:Any) -> Unit) {
 
         Environment.getExternalStorageDirectory()
         val filePath = App.getContext().getExternalFilesDir(null)?.path + "/familyTree.xls"
         val readFile = File(filePath);
         if (!readFile.exists()) {
-            callback.onError("未找到族谱文件，请确认文件路径或文件名。");
+            onError("未找到族谱文件，请确认文件路径或文件名。");
             return;
         }
         val inputStream = FileInputStream(readFile)
         val workbook = Workbook.getWorkbook(inputStream)
-        saveFamilyTreeData2Database(workbook, callback)
-        saveMemberDetailData2Database(workbook, callback)
+        saveFamilyTreeData2Database(workbook, onError, onSuccess)
+        saveMemberDetailData2Database(workbook, onError, onSuccess)
     }
 
-    private fun saveFamilyTreeData2Database(workbook: Workbook, callback: DataCallback) {
+    private fun saveFamilyTreeData2Database(workbook: Workbook, onError:(String)->Unit, onSuccess:(o:Any) -> Unit) {
         val familyTreeBeans = mutableListOf<FamilyTreeBean>()
         val sheet = workbook.getSheet(0)
         sheet.apply {
@@ -55,21 +49,20 @@ class MainModel : BaseModel() {
                     continue
                 }
                 val bean = FamilyTreeBean(
-                    id = null,
-                    memberId = memberId.contents.toInt(),
-                    parentId = parentId.contents.toInt(),
+                    memberId = memberId.contents,
+                    parentId = parentId.contents,
                     name = name.contents,
-                    gender = gender.contents.toInt()
+                    gender = gender.contents
                 )
                 familyTreeBeans.add(bean)
             }
         }
         AppDatabase.getInstance().familyDao().insertAllMembers(familyTreeBeans)
-            .subscribeDbResult({ callback.onSuccess(it) }, { callback.onError("保存数据失败，请复试") })
+            .subscribeDbResult({ onSuccess(it) }, { onError("保存数据失败，请复试") })
 
     }
 
-    private fun saveMemberDetailData2Database(workbook: Workbook, callback: DataCallback) {
+    private fun saveMemberDetailData2Database(workbook: Workbook, onError:(String)->Unit, onSuccess:(o:Any) -> Unit) {
         val memberDetailBeans = mutableListOf<MemberDetailBean>()
         val sheet = workbook.getSheet(1)
         sheet.apply {
@@ -85,16 +78,17 @@ class MainModel : BaseModel() {
                 val profession = getCell(8, i)
                 val education = getCell(9, i)
                 val parent1 = getCell(10, i)
-                val parent2 = getCell(11, i)
-                val event = getCell(12, i)
+                val parent1Name = getCell(11, i)
+                val parent2 = getCell(12, i)
+                val parent2Name = getCell(13, i)
+                val event = getCell(14, i)
                 if (memberId.contents.isEmpty()) {
                     continue
                 }
                 val bean = MemberDetailBean(
-                    id = null,
-                    memberId = memberId.contents.toInt(),
+                    memberId = memberId.contents,
                     name = name.contents,
-                    gender = gender.contents.toInt(),
+                    gender = gender.contents,
                     birth = birth.contents,
                     oldDate = oldDate.contents,
                     mateName = mateName.contents,
@@ -102,8 +96,10 @@ class MainModel : BaseModel() {
                     address = address.contents,
                     profession = profession.contents,
                     education = education.contents,
-                    parent1 = parent1.contents,
-                    parent2 = parent2.contents,
+                    parent1Id = parent1.contents,
+                    parent1Name = parent1Name.contents,
+                    parent2Id = parent2.contents,
+                    parent2Name = parent2Name.contents,
                     event = event.contents
                 )
                 memberDetailBeans.add(bean)
@@ -111,6 +107,14 @@ class MainModel : BaseModel() {
         }
         workbook.close()
         AppDatabase.getInstance().familyDao().insertAllDetails(memberDetailBeans)
-            .subscribeDbResult({ callback.onSuccess(it) }, { callback.onError("保存数据失败，请复试") })
+            .subscribeDbResult({ onSuccess(it) }, { onError("保存数据失败，请复试") })
+    }
+
+    /**
+     * 从数据库中查询所有的族谱成员
+     */
+    fun getAllMember(onError:(String)->Unit, onSuccess:(o:Any) -> Unit) {
+        AppDatabase.getInstance().familyDao().queryAllMembers()
+            .subscribeDbResult({ onSuccess(it) }, { onError("查询失败，请退出应用重试。") })
     }
 }

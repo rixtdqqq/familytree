@@ -43,6 +43,7 @@ class DialogImportData(
     private fun initView() {
         tv_import_start.setOnClickListener {
             mPresenter.importFamilyTreeDataFromSDCard2Database()
+            this.dismiss()
         }
         tv_import_instruction.setOnClickListener {
             context.startActivity(Intent(context, InstructionImportActivity::class.java))

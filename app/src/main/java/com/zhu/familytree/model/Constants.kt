@@ -9,5 +9,7 @@ package com.zhu.familytree.model
 
 object Constants {
     const val DETAIL_TAG = "DetailActivity"
+    const val MAIN_TAG = "MainActivity"
     const val MEMBER_ID = "member_id"
+    const val PARENT_ID = "parent_id"
 }

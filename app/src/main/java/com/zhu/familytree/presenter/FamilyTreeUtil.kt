@@ -9,16 +9,16 @@ import com.zhu.familytree.model.FamilyTreeBean
  * @since 2019/11/9
  */
 object FamilyTreeUtil {
-//    fun getLevel(familyTreeBean: FamilyTreeBean?, map: HashMap<Int, FamilyTreeBean>): Int {
-//        return if (0 == familyTreeBean?.parentNodeId) 0 else (1 + getLevel(
-//            getFamilyTree(
-//                familyTreeBean?.parentNodeId,
-//                map
-//            ), map
-//        ))
-//    }
-//
-//    private fun getFamilyTree(id: Int?, map: HashMap<Int, FamilyTreeBean>): FamilyTreeBean? {
-//        return if (id in map) map[id] else null
-//    }
+    fun getLevel(familyTreeBean: FamilyTreeBean?, map: HashMap<Int, FamilyTreeBean>): Int {
+        return if (0 == familyTreeBean?.parentNodeId) 0 else (1 + getLevel(
+            getFamilyTree(
+                familyTreeBean?.parentNodeId,
+                map
+            ), map
+        ))
+    }
+
+    fun getFamilyTree(id: Int?, map: HashMap<Int, FamilyTreeBean>): FamilyTreeBean? {
+        return if (id in map) map[id] else null
+    }
 }

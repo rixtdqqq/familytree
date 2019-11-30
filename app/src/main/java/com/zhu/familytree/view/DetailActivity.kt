@@ -1,6 +1,7 @@
 package com.zhu.familytree.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -22,9 +23,11 @@ class DetailActivity : AppCompatActivity(), IDetailView {
             DataBindingUtil.setContentView(this, R.layout.activity_detail)
         val presenter = DetailPresenter(this)
         lifecycle.addObserver(presenter)
-        intent.run {
-            val memberId = extras?.getInt(Constants.MEMBER_ID, 0) ?: 0
-            presenter.getMemberDetailAndShow(memberId)
+        intent?.let {
+            it.extras?.let {
+                val memberId = it.getString(Constants.MEMBER_ID, "0")
+                presenter.getMemberDetailAndShow(memberId)
+            }
         }
 
         toolbar.run {
@@ -41,6 +44,7 @@ class DetailActivity : AppCompatActivity(), IDetailView {
     }
 
     override fun showDetail(detail: MemberDetailBean) {
+        Log.d(Constants.DETAIL_TAG, "DetailActivity : person = $detail")
         binding.member = detail
     }
 

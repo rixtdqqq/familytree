@@ -2,7 +2,6 @@ package com.zhu.familytree.model
 
 import com.zhu.familytree.base.AppDatabase
 import com.zhu.familytree.base.BaseModel
-import com.zhu.familytree.base.DataCallback
 
 /**
  * @description 详情model
@@ -13,12 +12,12 @@ import com.zhu.familytree.base.DataCallback
 
 class DetailModel : BaseModel() {
 
-    fun getMemberDetail(memberId: Int, callback: DataCallback) {
+    fun getMemberDetail(memberId: String, onSuccess: (o: Any) -> Unit, onError: (String) -> Unit) {
         AppDatabase.getInstance().familyDao()
-            .queryMemberByMemberId(memberId).subscribeDbResult({
-                callback.onSuccess(it)
+            .queryMemberByMemberIdAndParentId(memberId).subscribeDbResult({
+                onSuccess(it)
             }, {
-                callback.onError("未查询到此人的详情信息")
+                onError("未查询到此人的详情信息")
             })
 
     }

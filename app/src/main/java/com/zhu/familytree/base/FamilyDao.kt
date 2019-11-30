@@ -32,5 +32,11 @@ interface FamilyDao {
      * 根据memberId查询一个族谱成员的详细信息
      */
     @Query("SELECT * FROM member_detail WHERE memberId=:memberId")
-    fun queryMemberByMemberId(memberId: Int): Single<MemberDetailBean>
+    fun queryMemberByMemberIdAndParentId(memberId: String): Single<MemberDetailBean>
+
+    /**
+     * 查询所有成员
+     */
+    @Query("SELECT * FROM family_members")
+    fun queryAllMembers(): Single<List<FamilyTreeBean>>
 }
